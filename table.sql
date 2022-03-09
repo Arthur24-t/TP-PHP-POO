@@ -27,3 +27,5 @@ CREATE TABLE Modo(
   `nom_modo` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`Id_modo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+insert into Modo values(1,"modo","modo");

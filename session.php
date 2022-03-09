@@ -1,65 +1,5 @@
-<?php
-
-class Modo
-{
-
-    private string $nom;
-    public string $username;
-    public string $mdp;
-
-
-
-    public function Modo()
-    {
-        $this->nom = "modo";
-        $this->username = "modo";
-        $this->mdp = "modo";
-    }
-
-    public function getusername()
-    {
-        return $this->username;
-    }
-    public function getMdp()
-    {
-        return $this->mdp;
-    }
-}
-
-$modo = new Modo();
-
-$username = $_POST['username'];
-$mdp = $_POST['mdp'];
-
-if (isset($_POST['submit'])) {
-    if ($username == $modo->getusername() && $mdp == $modo->getMdp()) {
-        $_POST['valide'] = 1;
-        
-    }
-}
-if ($_POST['valide'] == 0) {
-
-
-?>
-    <html>
-
-    <body>
-
-        <h1>Connection</h1>
-
-
-        <form action="" method="POST">
-
-            <p>Pseudo</p>
-            <input type="text" name="username">
-            </br>
-            <p>titre du billet</p>
-            <input type="password" name="mdp">
-            <input type="submit" name="submit">
-        </form>
-    <?php
-} else {
-    ?>
+<html>
+<body>
 <h1>Ajout d'un Billet ou commentaire </h1>
 <form action="" method="POST">
     <h3>Billet</h3>
@@ -93,18 +33,32 @@ if ($_POST['valide'] == 0) {
 if(isset($_POST['titre_bil']))
 {
     $newBillet = new Billet($_POST['id_bil'],$_POST['date_bil'],$_POST['titre_bil'],$_POST['contenue_bil']);
+
+    $ins = $pdo->prepare("insert into billet (id_bil,date_bil,titre_bil,contenue_bil) values(:id_bil,:date_bil,:titre_bil,:contenue_bil)");
+    $ins->execute(array(
+       ":Id_bil"=>$_POST['id_bil'],
+       ":Date_bil"=> $_POST['date_bil'],
+       ":Titre_bil"=>$_POST['titre_bil'],
+       ":contenu"=>$_POST['contenue_bil']
+    )); 
+
 }
 
 if(isset($_POST['contenue_com']))
 {
     $newCom = new Commentaire($_POST['id_com'],$_POST['date_bil'],$_POST['auteur_com'],$_POST['mail_com'],$_POST['commentaire_com'],$_POST['idBill_com']);
+    $ins = $pdo->prepare("insert into utilisateurs (id_com,date_bil,auteur_com,mail_com,commentaire_com,idBill_com) values(:id_com,:date_bil,:auteur_com,:mail_com,:commentaire_com,:idBill_com)");
+    $ins->execute(array(
+       ":id_com"=>$_POST['id_bil'],
+       ":date_bil"=> $_POST['date_bil'],
+       ":auteur_com"=>$_POST['titre_bil'],
+       ":mail_com"=>$_POST['contenue_bil'],
+       ":commentaire_com"=>$_POST['commentaire_com'],
+       ":idBill_com"=>$_POST['idBill_com']
+    )); 
 }
 
 
 ?>
-
-    </body>
-
-    </html>
-
-<?php } ?>
+</body>
+</html>
