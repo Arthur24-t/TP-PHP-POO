@@ -7,8 +7,6 @@ CREATE TABLE `billet` (
   PRIMARY KEY (`Id_bil`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-Billet (Id_bil, Date_bil,Titre_bil,contenu) ;
-Commentaire (Id_com, date_com, auteur_com, mail_auteur, commentaire, Id_bil).
 
 CREATE TABLE `commentaire` (
   `Id_com` INTEGER(15) NOT NULL,

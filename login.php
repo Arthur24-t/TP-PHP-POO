@@ -1,4 +1,5 @@
 <?php
+ $_SESSION["autoriser"]=null;
    session_start();
    @$login=$_POST["login"];
    @$pass=$_POST["pass"];
@@ -18,7 +19,7 @@
       else
          $erreur="Mauvais login ou mot de passe!";
    }
-if ($_SESSION["autorsier"] != "oui")
+if ($_SESSION["autoriser"] != "oui")
 {
 ?>
 <!DOCTYPE html>
